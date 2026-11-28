@@ -1,0 +1,11 @@
+{
+  "finding": "F-07",
+  "scope": "Local OWASP Juice Shop training lab with a synthetic account",
+  "status": "Tested",
+  "observations": {
+    "browser_session_data_cleared": true,
+    "previous_credential_remained_valid": true,
+    "response_status": 200
+  },
+  "evidence": "xss-session-chain.png"
+}
