@@ -4,8 +4,11 @@
   "status": "Tested",
   "observations": {
     "browser_session_data_cleared": true,
+    "xss_read_token_from_local_storage": true,
     "previous_credential_remained_valid": true,
-    "response_status": 200
+    "response_status": 200,
+    "token_value_recorded": false
   },
-  "evidence": "xss-session-chain.png"
+  "evidence": "xss-session-chain.png",
+  "replay_endpoint": "GET /rest/user/whoami?fields=email"
 }

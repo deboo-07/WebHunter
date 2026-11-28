@@ -1,22 +1,19 @@
-# Week 1 - Test Plan (Juice Shop v20.4.0)
+# Week 1 - Baseline Test Plan (Juice Shop v20.4.0)
 
-Scope: http://localhost:3000 (local lab only)
+Scope: local training instance at `http://127.0.0.1:3000`; normal navigation and synthetic-account flows only.
 
-## Priority targets
-1. /rest/products/search?q= : test the q parameter for injection and XSS.
-2. /rest/user/login : test authentication logic and error messages.
-3. JWT token : check how it is built and whether the server validates it properly.
-4. /rest/basket/{id} : test whether changing the ID exposes another user's basket (IDOR).
-5. /rest/admin/ : test what the admin endpoints expose without login.
-6. /api/Users/ : test registration fields and what the response reveals.
-7. /rest/products/{id}/reviews : test whether the review author data can be abused.
+## Week 1 checks
 
-## Order of work
-1. DOM XSS on the search feature (next task).
-2. Authentication and JWT checks.
-3. Access control checks (IDOR on basket, admin paths).
-4. Review the remaining endpoints in the site map.
+1. Map the main pages and visible routes through normal browser navigation.
+2. Record HTTP methods, paths, status codes, and content types for ordinary requests.
+3. Observe registration and valid login with a synthetic account; document where the session token is stored and sent without copying its value.
+4. Configure Burp Proxy and record whether traffic is captured.
+5. Review and sanitize the notes before consolidating them into the Week 1 pack.
 
-## Tools
-- Burp Proxy and HTTP history for capture
-- Burp Repeater for manual testing
+## Out of scope for Week 1
+
+- XSS payload testing.
+- SQL injection payload testing or authentication bypass attempts.
+- Testing against public hosts.
+
+The XSS and SQL injection assessments are documented separately in Week 2.

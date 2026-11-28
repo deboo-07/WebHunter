@@ -1,12 +1,6 @@
 # Week 1 contribution
 
-This appendix contains the application map, request inventory, authentication notes, test plan and browser evidence from the separate Week 1 archive.
-
-## DOM XSS observation
-
-The local Juice Shop search interface displayed a browser alert during DOM XSS testing. The alert screenshot supplements team finding F-03. The recommended fix is to render untrusted input as text and review the frontend for unsafe HTML insertion.
-
-[Browser evidence](xss_alert.png) | [Team finding F-03](../../week2/findings/F-03-dom-xss.md)
+This appendix contains the application map, request inventory, authentication notes and baseline test plan from the separate Week 1 archive. Week 1 covers mapping and normal application flows only; XSS and SQL injection testing are out of scope for this week and are documented in Week 2.
 
 ## Lab notes
 

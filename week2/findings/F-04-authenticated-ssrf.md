@@ -27,9 +27,9 @@ The server made an authenticated, user-directed request to a loopback service. T
 
 ## CVSS v4.0
 
-- Score: 5.3 Medium
-- Vector: CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N
-- Rationale: authentication is required; a supplied URL reached a controlled service on the local network. Confidentiality impact is kept Low and limited to the demonstrated request behavior. Score calculated with the FIRST CVSS v4.0 calculator.
+- Score: Not assigned — impact was not demonstrated
+- Vector: Not assigned
+- Rationale: the test confirms that the application issued a request to the tester-controlled loopback sink, but it does not show disclosure of restricted information, unauthorized modification, or service impact. Under the FIRST CVSS v4.0 impact definitions, the demonstrated consequence must support the impact metrics; this evidence is not enough to assign them. Reassess only if authorized testing establishes a concrete impact.
 
 ## Remediation
 

@@ -1,9 +1,8 @@
-# Week 1 test plan and results
+# Week 1 baseline plan and results
 
 ## Scope
 
 - Tested: local clone, http://127.0.0.1:3000.
-- Local test sink: http://127.0.0.1:3001, used only to confirm the image-fetch behavior.
 - Accounts: synthetic accounts created in the local lab.
 - Public hosts: no active testing.
 
@@ -11,14 +10,12 @@
 
 | Check | Result | Evidence |
 |---|---|---|
-| Home page and product catalog load | PASS | week2/evidence/F-01/home-catalog.png |
+| Home page and product catalog load | PASS | application-map.md |
 | HTTP/API route inventory | PARTIAL | request-response-inventory.csv |
-| Login baseline and authentication bypass | PASS; bypass finding F-02 | week2/evidence/F-02/ |
-| Login baseline, admin account | PASS; admin + wrong password returned 401 (B2, added 2026-11-28) | week2/evidence/F-02/retest-2026-11-28.json |
-| Search SQLi check | NOT CONFIRMED; `q=' OR 1=1--` returned 500, not a confirmed injection (tested 2026-11-28) | week2/evidence/F-02/retest-2026-11-28.json |
-| Two-account object ownership comparison | PASS; BOLA finding F-05 | week3/evidence/F-05/ |
-| Browser session and token storage | PARTIAL; XSS token access and replay confirmed | week3/evidence/F-07/ |
+| Normal synthetic-account login/session flow | DOCUMENTED | auth-session-flow.md |
 | Burp project save | PENDING | BURP_PROJECT_STATUS.md |
+
+Week 1 did not test XSS or SQL injection. Those topics and their evidence are in the Week 2 assessment materials.
 
 ## Constraints
 
