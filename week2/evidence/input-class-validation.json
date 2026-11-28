@@ -1,0 +1,46 @@
+{
+  "target": "OWASP Juice Shop 20.4.0-SNAPSHOT at 127.0.0.1:3000",
+  "tests": {
+    "domXss": {
+      "route": "/#/search?q={encoded harmless execution marker}",
+      "executedInBrowser": true,
+      "localStorageTokenReadable": true,
+      "screenshot": "F-03/dom-xss-executed.png"
+    },
+    "ssrf": {
+      "route": "POST /profile/image/url",
+      "status": 302,
+      "controlledSink": "127.0.0.1:3001/test.png",
+      "sinkObservedRequest": true,
+      "screenshot": "F-04/controlled-local-sink.png",
+      "outboundThirdPartyRequest": false
+    },
+    "upload": {
+      "route": "POST /file-upload",
+      "file": "harmless-test.txt",
+      "bytes": 25,
+      "status": 204,
+      "acceptedByEndpoint": true,
+      "harmfulBehaviorObserved": false
+    },
+    "traversal": {
+      "route": "GET /ftp/%2e%2e%2fREADME.md",
+      "status": 403,
+      "sourceFileContentReturned": false
+    }
+  },
+  "interpretation": {
+    "domXss": "confirmed in local browser; input executed a harmless DOM marker",
+    "ssrf": "confirmed to controlled loopback sink only; no internal sensitive resource or external destination tested",
+    "upload": "extension outside the listed allowlist was accepted, but no file persistence or execution was observed; not scored as a security finding",
+    "traversal": "encoded slash traversal attempt was rejected; this single case did not establish a path traversal finding"
+  },
+  "sessionChain": {
+    "xssReadTokenFromLocalStorage": true,
+    "replayAfterClientTokenAndCookieClear": true,
+    "replayStatus": 200,
+    "tokenValueStored": false,
+    "evidenceScreenshot": "week3/evidence/F-07/xss-session-chain.png"
+  },
+  "handling": "No credentials, cookies, tokens, or sensitive file contents were written to evidence."
+}
