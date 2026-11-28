@@ -7,6 +7,7 @@
 - Endpoint: GET /rest/basket/{id}
 - Test date: 2026-11-23
 - Accounts: two synthetic customer accounts owned by the tester
+- Registration: synthetic accounts were created through the self-service `POST /api/Users` endpoint (HTTP 201; see `week3/evidence/api-validation.json`).
 
 ## Summary
 
@@ -18,9 +19,9 @@ An authenticated customer can read another customer's basket when the object ide
 
 ## CVSS v4.0
 
-- Score: 5.3 Medium
-- Vector: CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N
-- Rationale: an attacker needs a basic account and can read a limited object belonging to another account. Only read access was demonstrated. Score calculated with the FIRST CVSS v4.0 calculator.
+- Score: 6.9 Medium
+- Vector: CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N
+- Rationale: the local registration endpoint self-provisions accounts, so an attacker can create an account as part of the attack and Privileges Required is None. Only limited read access to another account's basket was demonstrated. Score recalculated with the CVSS v4.0 calculator.
 
 ## Evidence and false-positive checks
 

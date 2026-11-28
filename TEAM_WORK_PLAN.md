@@ -30,7 +30,7 @@ The finding lead owns the technical notes and evidence for their finding, while 
 | 3 | حمد — F-04 API context and retest case | إيمان |
 | 3 | همام — F-05 two-account proof | حمد |
 
-The four middle members also maintain their own rows in the shared test matrix and API inventory. Before Week 4, they jointly check that the four findings have consistent IDs, evidence links, impact limits, and remediation steps.
+The four middle members also maintain their own rows in the shared test matrix and API inventory. Before Week 4, they jointly check that the four primary finding records (F-02 through F-05) have consistent IDs, evidence links, impact limits, and remediation steps.
 
 ## Handoffs and scope
 
@@ -43,7 +43,7 @@ The four middle members also maintain their own rows in the shared test matrix a
 
 ## Review of the current four-week pack
 
-- Four findings are confirmed in the local training app: F-02 SQL injection, F-03 DOM XSS, F-04 loopback-only SSRF, and F-05 read-only BOLA. F-01, F-06, and F-08 are supporting observations; F-07 is chain evidence, not a separate scored finding.
+- Three findings have scored impact in the local training app: F-02 SQL injection, F-03 DOM XSS, and F-05 read-only BOLA. F-03 uses UI:A because the user must consciously open the crafted link; F-05 uses PR:N because account registration is self-service. F-04 confirms a server-side request to a controlled loopback sink, but impact was not demonstrated and no CVSS Base score is assigned. F-01, F-06, and F-08 are supporting observations; F-07 is chain evidence, not a separate scored finding.
 - Public-host testing was not performed. The current evidence must not be attributed to either public URL.
 - Retest evidence is pending because no fixes were applied. CSRF remains inconclusive; LFI/RFI, session fixation, broad rate-limit behavior, and business-logic coverage remain incomplete or not run. The demo checklist has screenshots, but no video.
 - The professional PDF is `DEPI_Assessment_Professional.pdf` in the project root; it is not a `week4/final-report.pdf` file.

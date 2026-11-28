@@ -1,0 +1,52 @@
+{
+  "target": "OWASP Juice Shop 20.4.0-SNAPSHOT at 127.0.0.1:3000",
+  "setup": {
+    "accountA": {
+      "registrationStatus": 201,
+      "loginStatus": 200,
+      "tokenStored": false
+    },
+    "accountB": {
+      "registrationStatus": 201,
+      "loginStatus": 200,
+      "tokenStored": false
+    }
+  },
+  "tests": {
+    "ownBasketSeed": {
+      "method": "POST",
+      "endpoint": "/api/BasketItems",
+      "status": 200,
+      "created": true
+    },
+    "unauthenticatedWhoamiBaseline": {
+      "status": 200,
+      "userObjectEmpty": true
+    },
+    "authenticatedWhoami": {
+      "status": 200,
+      "hasEmail": true,
+      "passwordOmittedByDefault": true
+    },
+    "explicitPasswordField": {
+      "status": 200,
+      "passwordPropertyReturned": true,
+      "valueStored": false
+    },
+    "crossAccountBasketRead": {
+      "endpoint": "/rest/basket/{synthetic B basket ID}",
+      "authenticatedAsAccount": "A",
+      "requestedAccount": "B",
+      "status": 200,
+      "objectReturned": true,
+      "productCount": 1,
+      "ownedTestObjectOnly": true
+    }
+  },
+  "conclusions": {
+    "passwordHashExposure": "confirmed: authenticated user can request own password hash via fields=password; value redacted",
+    "bola": "confirmed: account A read a populated basket belonging to synthetic account B",
+    "basketAdd": "synthetic account B basket populated successfully"
+  },
+  "handling": "Synthetic account identifiers, passwords, JWTs, password-hash values, and basket IDs were not written to evidence."
+}

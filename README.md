@@ -1,8 +1,8 @@
 # WebHunter — DEPI Project 2
 
-This repository is the shared workspace for a four-week web application and API assessment pack. The team allocation and upload paths are recorded in the [four-week team plan](TEAM_WORK_PLAN.md) and [per-person upload checklist](UPLOAD_CHECKLIST.md).
+This is the consolidated project pack for the four-week web application and API assessment. It contains the Week 1 baseline materials, the Week 2/3 finding and evidence handoffs, and the Week 4 report and submission records. Remaining test and retest gaps are listed in [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md) and [OPEN_ITEMS.md](OPEN_ITEMS.md).
 
-The initial repository setup is a scaffold. Week folders are placeholders until their owners upload the assigned files; this commit alone is not the completed assessment submission.
+The team allocation and upload paths are recorded in the [four-week team plan](TEAM_WORK_PLAN.md) and [per-person upload checklist](UPLOAD_CHECKLIST.md).
 
 ## Repository structure
 
@@ -19,4 +19,4 @@ See [REPO_STRUCTURE.md](REPO_STRUCTURE.md) for the week-by-week folder layout an
 
 Active testing belongs only on the isolated local training instance with synthetic accounts and data. Do not test public URLs without verified authorization. Keep tokens, passwords, hashes, personal data, and unrelated records out of repository evidence.
 
-Each owner should preserve the paths in the upload checklist. Week 2/3 owners send their updates to دبيان for one merged copy of shared matrices and indexes.
+Each owner should preserve the paths in the upload checklist. Shared maps and inventories have one canonical copy; Week 2/3 owners send their updates to دبيان to integrate without re-adding the same paths.

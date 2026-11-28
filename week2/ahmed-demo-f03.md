@@ -3,8 +3,8 @@
 | Field | Value |
 |---|---|
 | ID | F-03 |
-| Severity | Medium, CVSS v4.0 5.3 |
-| Vector | CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:N |
+| Severity | Medium, CVSS v4.0 5.1 |
+| Vector | CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:N/VA:N/SC:L/SI:L/SA:N |
 | Target | OWASP Juice Shop 20.4.0-SNAPSHOT, http://127.0.0.1:3000 (local lab) |
 | Location | Search route, query parameter `q` |
 | Test date | 2026-11-23 |

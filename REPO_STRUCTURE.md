@@ -32,3 +32,7 @@ This is the target layout after all team members upload their assigned files. Th
 - **Week 4:** دبيان integrates the finding handoffs into the report, remediation plan, retest checklist, traceability, and final package.
 
 The folder and file assignments are listed in [UPLOAD_CHECKLIST.md](UPLOAD_CHECKLIST.md).
+
+## Integration rule
+
+`week1/application-map.md` and `week1/request-response-inventory.csv` are the single canonical Week 1 files in the consolidated pack. Week 1 contains baseline mapping and normal-flow records; later-week payloads and findings stay in `week2/` and `week3/`. When integrating parallel pull requests, update these canonical files in one branch and rebase dependent branches instead of adding the same paths again.

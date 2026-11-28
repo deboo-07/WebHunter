@@ -6,12 +6,10 @@ An HTTP request has a method and path, headers, and sometimes a body. A response
 
 ```http
 GET / HTTP/1.1
-Host: 127.0.0.1:3000
+Host: juice-shop.herokuapp.com
 Accept: text/html
-Cookie: <redacted>
+Cookie: example=value
 ```
-
-Correction 2026-11-28: the original example used `Host: juice-shop.herokuapp.com`. That public host was **not** actively tested in this submission — all testing was on the local lab at `127.0.0.1:3000`. The example above now uses the local host.
 
 ## Methods to recognize
 
@@ -29,17 +27,13 @@ Headers carry metadata such as `Host`, `Origin`, `Referer`, `Accept`, `Content-T
 
 Apps may also keep tokens or identifiers in browser storage (Local Storage or Session Storage) and send them in headers such as `Authorization: Bearer …`. Storage is not automatically sent like a cookie: application code usually reads it and adds it to a request. Record the actual mechanism without copying live secrets into reports.
 
-In this lab, the JWT is stored in **both** places: `localStorage` and a `token` cookie. For `GET /rest/user/whoami`, the cookie is the one that actually authenticates the request — `Authorization: Bearer` alone returned an empty user object (verified 2026-11-28).
-
 ## Sessions and authentication
 
 A common flow is: submit credentials → server validates → server returns a session cookie or token → browser stores it → later requests include it → logout/expiry invalidates it. Capture this only with the lab account you create/use. Compare requests before and after login, and after logout. Never include raw passwords, tokens, or session cookies in screenshots or reports.
 
 ## HTTPS and Burp
 
-HTTPS protects traffic between the browser and the TLS endpoint. To inspect HTTPS through Burp, the browser trusts Burp's local CA certificate and Burp creates a separate TLS connection to the site.
-
-Correction 2026-11-28: the local Juice Shop lab in this submission runs over plain **HTTP** at `http://127.0.0.1:3000`, not HTTPS. No Burp CA trust was needed for the local lab. Do not bypass browser certificate warnings for unrelated sites, and do not present the HTTPS note as if the local lab was tested over TLS.
+HTTPS protects traffic between the browser and the TLS endpoint. To inspect HTTPS through Burp, the browser trusts Burp's local CA certificate and Burp creates a separate TLS connection to the site. For the selected HTTPS Juice Shop target, Burp certificate trust is needed if you inspect TLS traffic in a dedicated browser. Use Burp's built-in browser if available. Do not bypass browser certificate warnings for unrelated sites.
 
 ## Status-code groups
 
